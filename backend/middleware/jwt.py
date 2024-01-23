@@ -12,6 +12,7 @@ def create_jwt(user_data):
 
 # Fonction pour vérifier un token JWT
 def verify_jwt(token):
+    _, token = token.split(" ")
     try:
         decoded_data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         return decoded_data
