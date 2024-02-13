@@ -1,0 +1,4 @@
+.authentification{
+    height: calc(100vh - 60px);
+    @apply  flex items-center justify-center relative;
+}
