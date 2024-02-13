@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "database": "${workspaceFolder:voice-recognizer}/backend/example.db",
+      "name": "voice-recognizer"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}
