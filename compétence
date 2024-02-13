@@ -1,0 +1,48 @@
+C8: Améliorer le modèle, hyperparemètre: learning rate, epochs, optimizer ?
+C14: Améliorer le modèle par rapport à l'app, premier jet sur un entrainement ou chaque enregistrement se fait dans un environement sain et un deuxième jet pour ajouter du bruit sur les enregistrement.
+	coût d'un entrainement sans bruit & avec bruit (temps pris)
+
+- Intro 
+	-Pércisé le contexte lié au projet
+	
+- Evaluer le modèle 
+	- Metrics (loss, accuracy, confusion matrix)
+- Déterminé les point faible / diagnostique
+	- Teste réel en interieur / exterieur, sans/avec bruit
+	
+- Amélioration via la data/ Solution ?
+	-- App, process, data, modèle, intégration
+	- Taille du dataset
+	- équilibrage des classes
+	- Amélioration via les layers
+	- fine tuning
+
+- Ré evaluer apres amélioration
+	- Décrire nouvele méthode au besoin 
+		
+- Intégration de l'évolution du modèle à l'app 
+- Tester la non régression suite à l'évolution du modèle
+------------------------------------------------------------------
+
+L3 
+Etat de l'art
+
+- Veille techno sur les techno concurante à celle que j'ai choisi 
+- Comment j'ai fait ma veille, d'ou viennent les sources 
+- Choix entre mes source
+- comment j'évalue la pertinance du modèle 
+- comment j'ai fait mes recherhche et estime que la data est bonne ?
+
+-Etat de l'art, choix par rapport au contenu des sources  et 	conclusion
+
+sommaire 
+1 Contexte
+	- projet
+	- thématique
+2 système de veille
+	- comment j'ai choisi mes sources (nb contributeur/étoile git, article -> date  de parution, fiabilité de la source
+	- exemple de choix
+	- système de veille avec mode d'emploie
+3 etat de l'art
+	- mind map 
+	  
