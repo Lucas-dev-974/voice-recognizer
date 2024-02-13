@@ -16,7 +16,7 @@ def register(name, lastName, email, password):
 
     token = create_jwt({"id": user.id, "email": email})
 
-    return {"me": getUser(user), "token": token}
+    return {**getUser(user), "token": token}
 
 
 @hug.post("/")
@@ -28,4 +28,9 @@ def login(email, password, response):
         return "Mot de passe ou email incorrecte"
 
     token = create_jwt({"id": user.id, "email": email})
-    return {"me": getUser(user), "token": token}
+    return {**getUser(user), "token": token}
+
+
+@hug.get("/token", requires=authenticate)
+def tokenTest(user: hug.directives.user):
+    return True

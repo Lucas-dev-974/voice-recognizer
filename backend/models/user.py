@@ -12,4 +12,9 @@ class User(Base):
 
 
 def getUser(user: User):
-    return {"name": user.name, "lastName": user.last_name, "id": user.id}
+    return {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "lastName": user.last_name,
+    }

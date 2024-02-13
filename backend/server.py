@@ -1,6 +1,7 @@
 import hug
 from models import index
 from controller import authentification, fileManager
+import tensorflow
 
 api = hug.API(__name__)
 
