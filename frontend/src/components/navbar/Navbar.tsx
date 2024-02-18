@@ -1,7 +1,8 @@
 import { Show } from "solid-js";
-import "./navbar.css";
 import { Pages, logged, setCurrentPage } from "../../app.state";
 import { DefaultButton } from "../button/Button";
+
+import "./navbar.css";
 
 export function Navbar() {
   async function login() {
@@ -10,7 +11,9 @@ export function Navbar() {
 
   return (
     <nav id="navbar">
-      <div class="logo">Secure Voice - SV</div>
+      <div class="logo" onClick={() => setCurrentPage(Pages.home)}>
+        Secure Voice - SV
+      </div>
       <Show when={!logged()}>
         <div class="actions">
           <DefaultButton text="connexion" onClick={login} />

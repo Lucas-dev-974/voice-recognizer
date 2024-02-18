@@ -2,5 +2,5 @@
     @apply flex justify-between items-center px-10 w-[100vw] h-[60px] bg-blue-teal text-white; 
 }
 .logo {
-    @apply text-xl font-bold;   
+    @apply text-xl font-bold cursor-pointer;   
 }
