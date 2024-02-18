@@ -1,0 +1,7 @@
+.labeled-text-input{
+  @apply grid;
+}
+
+.text-input-labed{
+  @apply text-dark-blue
+}
