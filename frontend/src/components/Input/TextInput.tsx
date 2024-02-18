@@ -3,7 +3,7 @@ import "./TextInput.css";
 interface TextInputProps {
   id: string;
   defaultValue: string;
-  onInput: () => void;
+  onInput: (value: string) => void;
   placeholder?: string;
 }
 
@@ -14,7 +14,7 @@ export function TextInput(props: TextInputProps) {
       id={props.id}
       type="text"
       value={props.defaultValue}
-      onInput={props.onInput}
+      onInput={(element) => props.onInput(element.target.value)}
       placeholder={props.placeholder ?? ""}
     />
   );

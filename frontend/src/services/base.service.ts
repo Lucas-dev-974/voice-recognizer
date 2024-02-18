@@ -1,4 +1,4 @@
-import { user } from "../app.state";
+import { getUser } from "../app.state";
 
 enum HTTPMethod {
   GET = "GET",
@@ -29,7 +29,7 @@ export class BaseService {
         method: method,
         ...body,
         headers: {
-          ...this.getAuthorizationHeader(user()?.token),
+          ...this.getAuthorizationHeader(getUser()?.token),
           ...this.getContentTypeHeader(data),
         },
       });

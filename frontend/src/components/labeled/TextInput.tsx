@@ -3,7 +3,7 @@ import { TextInput } from "../Input/TextInput";
 import "./TextInput.css";
 
 interface LabeledTextInputProps {
-  onInput: () => void;
+  onInput: (value: string) => void;
   label: string;
   defaultValue: string;
   id: string;

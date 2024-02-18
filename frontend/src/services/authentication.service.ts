@@ -6,7 +6,11 @@ export class AuthenticationService {
     return await BaseService.get("/authentification/token");
   }
 
-  static async login(user: Pick<User, "email" | "password">) {}
+  static async login(user: Pick<User, "email" | "password">) {
+    return await BaseService.post("/authentification", user);
+  }
 
-  static async register(user: User) {}
+  static async register(user: User) {
+    return await BaseService.post("/authentification", user);
+  }
 }

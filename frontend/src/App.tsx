@@ -9,6 +9,8 @@ import { AuthenticationService } from "./services/authentication.service";
 import { User } from "./model/User";
 import { NotificationsService } from "./nofication/Notification";
 
+import "./app.utils";
+
 const App: Component = () => {
   onMount(async () => {
     const response = await AuthenticationService.token(getUser() as User);

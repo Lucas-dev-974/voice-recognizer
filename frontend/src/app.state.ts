@@ -7,5 +7,5 @@ export enum Pages {
 }
 
 export const [currentPage, setCurrentPage] = createSignal<Pages>(Pages.home);
-export const [user, setUser] = createSignal<User>();
+export const [getUser, setUser] = createSignal<User>();
 export const [logged, setLogged] = createSignal<boolean>(false);

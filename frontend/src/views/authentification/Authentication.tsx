@@ -7,6 +7,8 @@ import { Register } from "./auth-form/Register";
 const [onAuth, setOnAuth] = createSignal<"login" | "register">("login");
 
 export function Authentication() {
+  const [callback, setCallback] = createSignal<() => void>();
+
   return (
     <div class="authentification">
       <div class="rounded relative bg-slate-100 lg:w-1/2 w-96 top-[-100px] xl:px-20 lg:px-15 md:px-15 px-10">
@@ -15,21 +17,33 @@ export function Authentication() {
             <Login />
           </Match>
           <Match when={onAuth() == "register"}>
-            <Register />
+            <Register setValidateCallback={setCallback} />
           </Match>
         </Switch>
 
         <div class="flex justify-end gap-2 py-3">
-          <DefaultButton
-            text="S'enregistrer"
-            onClick={() => setOnAuth("register")}
-          />
-          <DefaultButton
-            text="Se connecter"
-            onClick={() => setOnAuth("login")}
-          />
+          <Switch>
+            <Match when={onAuth() == "login"}>
+              <DefaultButton
+                text="S'enregistrer"
+                onClick={() => setOnAuth("register")}
+              />
+              <ValidateButton validate={callback} />
+            </Match>
+            <Match when={onAuth() == "register"}>
+              <DefaultButton
+                text="Se connecter"
+                onClick={() => setOnAuth("login")}
+              />
+              <ValidateButton validate={callback} />
+            </Match>
+          </Switch>
         </div>
       </div>
     </div>
   );
+}
+
+function ValidateButton(props: { validate: () => void }): JSXElement {
+  return <DefaultButton text="Valider" onClick={props.validate} />;
 }
