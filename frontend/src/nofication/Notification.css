@@ -1,0 +1,3 @@
+.notification-container{
+  @apply absolute w-fit top-4 left-4 flex flex-col-reverse
+}
