@@ -1,0 +1,3 @@
+.text-input{
+  @apply text-dark-blue rounded px-4 py-1;
+}
