@@ -1,0 +1,3 @@
+.lost-password {
+  @apply no-underline text-dark-blue italic text-[12px]
+}
