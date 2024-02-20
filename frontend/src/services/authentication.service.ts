@@ -1,4 +1,5 @@
 import { User } from "../model/User";
+import { UserLoginForm } from "../views/authentification/auth-form/auth.utils";
 import { BaseService } from "./base.service";
 
 export class AuthenticationService {
@@ -6,7 +7,7 @@ export class AuthenticationService {
     return await BaseService.get("/authentification/token");
   }
 
-  static async login(user: Pick<User, "email" | "password">) {
+  static async login(user: UserLoginForm) {
     return await BaseService.post("/authentification", user);
   }
 

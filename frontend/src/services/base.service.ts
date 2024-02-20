@@ -1,4 +1,5 @@
 import { getUser } from "../app.state";
+import { addError } from "../app.utils";
 
 enum HTTPMethod {
   GET = "GET",
@@ -15,28 +16,33 @@ enum HTTPDataType {
 export class BaseService {
   static host: string = "http://127.0.0.1:8000/api";
 
-  static async generic(url: string, method: HTTPMethod, data: object = {}) {
-    let response: Response;
-    let body: object = {};
+  static buildForm(data: any) {
+    const form = new FormData();
+    const keys = Object.keys(data);
 
-    if (data instanceof FormData) body = { body: data };
-    else body = { body: JSON.stringify(data) };
+    keys.forEach((key) => form.append(key, data[key]));
+    return form;
+  }
 
-    if (method == HTTPMethod.GET) body = {};
+  static async generic(url: string, method: HTTPMethod, data?: any) {
+    let body;
 
+    if (method != HTTPMethod.GET) body = { body: BaseService.buildForm(data) };
     try {
-      response = await fetch(this.host + url, {
+      const response = await fetch(this.host + url, {
         method: method,
         ...body,
-        headers: {
-          ...this.getAuthorizationHeader(getUser()?.token),
-          ...this.getContentTypeHeader(data),
-        },
       });
 
-      return response;
+      const json = await response.json();
+
+      if (response.status != 200) {
+        addError({ content: json });
+      }
+
+      return await json;
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
       return false;
     }
   }
