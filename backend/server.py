@@ -2,7 +2,8 @@ import hug
 from models import index
 from controller import authentification, fileManager
 from hug.middleware import CORSMiddleware
-import tensorflow
+
+# import tensorflow
 
 api = hug.API(__name__)
 api.extend(authentification, "/api/authentification")

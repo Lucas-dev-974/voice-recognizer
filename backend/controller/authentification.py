@@ -1,13 +1,18 @@
 import hug
 from middleware.jwt import authenticate, create_jwt
-from falcon import HTTP_401, HTTP_404
+from falcon import HTTP_401, HTTP_404, HTTP_400
 from models.user import User, getUser
 from config.connexion import session
 from middleware.hash import hash_password, verify_password
 
 
 @hug.post("/register")
-def register(name, lastName, email, password):
+def register(name, lastName, email, password, response):
+    existing = session.query(User).filter_by(email=email).first()
+    if existing:
+        response.status = HTTP_400
+        return "L'email est déjà enregistrer"
+
     password = hash_password(password)
     user = User(name=name, email=email, password=password, last_name=lastName)
 
