@@ -1,17 +1,18 @@
 import { Show } from "solid-js";
-import { Pages, logged, setCurrentPage } from "../../app.state";
+import { Pages, logged } from "../../app.state";
 import { DefaultButton } from "../button/Button";
 
 import "./navbar.css";
+import { changePage } from "../../app.utils";
 
 export function Navbar() {
   async function login() {
-    setCurrentPage(Pages.authentication);
+    changePage(Pages.authentication);
   }
 
   return (
     <nav id="navbar">
-      <div class="logo" onClick={() => setCurrentPage(Pages.home)}>
+      <div class="logo" onClick={() => changePage(Pages.home)}>
         Secure Voice - SV
       </div>
       <Show when={!logged()}>
