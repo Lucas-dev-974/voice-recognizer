@@ -1,5 +1,8 @@
 import { User } from "../model/User";
-import { UserLoginForm } from "../views/authentification/auth-form/auth.utils";
+import {
+  UserLoginForm,
+  UserRegisterForm,
+} from "../views/authentification/auth-form/auth.utils";
 import { BaseService } from "./base.service";
 
 export class AuthenticationService {
@@ -11,7 +14,7 @@ export class AuthenticationService {
     return await BaseService.post("/authentification", user);
   }
 
-  static async register(user: User) {
-    return await BaseService.post("/authentification", user);
+  static async register(user: UserRegisterForm) {
+    return await BaseService.post("/authentification/register", user);
   }
 }
