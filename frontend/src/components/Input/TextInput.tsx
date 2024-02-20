@@ -2,7 +2,7 @@ import "./TextInput.css";
 
 interface TextInputProps {
   id: string;
-  defaultValue: string;
+  defaultValue?: string;
   onInput: (value: string) => void;
   placeholder?: string;
 }

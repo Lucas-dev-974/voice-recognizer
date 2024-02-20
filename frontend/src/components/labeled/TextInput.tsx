@@ -5,7 +5,7 @@ import "./TextInput.css";
 interface LabeledTextInputProps {
   onInput: (value: string) => void;
   label: string;
-  defaultValue: string;
+  defaultValue?: string;
   id: string;
   placeholder?: string;
 }
@@ -18,7 +18,7 @@ export function LabeledTextInput(props: LabeledTextInputProps) {
       </label>
       <TextInput
         id={props.id}
-        defaultValue={props.defaultValue}
+        defaultValue={props.defaultValue ?? ""}
         onInput={props.onInput}
         placeholder={props.placeholder}
       />
