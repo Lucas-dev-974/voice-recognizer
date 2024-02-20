@@ -2,7 +2,7 @@ import { User } from "../model/User";
 import {
   UserLoginForm,
   UserRegisterForm,
-} from "../views/authentification/auth-form/auth.utils";
+} from "../views/authentification/auth.utils";
 import { BaseService } from "./base.service";
 
 export class AuthenticationService {
