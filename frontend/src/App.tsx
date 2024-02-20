@@ -10,8 +10,10 @@ import { User } from "./model/User";
 import { NotificationsService } from "./nofication/Notification";
 
 import "./app.utils";
+import { retrieveLocal } from "./app.utils";
 
 const App: Component = () => {
+  retrieveLocal();
   onMount(async () => {
     const response = await AuthenticationService.token(getUser() as User);
     if (!!response) return setLogged(true);
