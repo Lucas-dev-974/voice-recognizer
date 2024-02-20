@@ -2,9 +2,11 @@ import { JSXElement, createSignal } from "solid-js";
 import { CloseIcon } from "../icons/CloseIcon";
 
 import "./NotificationItem.css";
+import { removeNotification } from "./Notification";
 
 interface NotificationItemProps {
   content: string | JSXElement;
+  id: number;
 }
 
 export function NotificationItem(props: NotificationItemProps) {
@@ -13,6 +15,7 @@ export function NotificationItem(props: NotificationItemProps) {
   );
 
   function closeNotification() {
+    removeNotification(props.id);
     ref().remove();
   }
   return (
