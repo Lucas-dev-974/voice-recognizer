@@ -1,5 +1,7 @@
 import "./button.css";
 
+// TODO make css for button size
+
 interface DefaultButtonProps {
   text: string;
   onClick: () => void;
