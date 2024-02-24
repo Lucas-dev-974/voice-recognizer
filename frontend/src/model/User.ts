@@ -5,4 +5,5 @@ export type User = {
   lastName: string;
   token: string;
   password?: string;
+  recognizableVoice?: boolean;
 };
