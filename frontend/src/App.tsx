@@ -1,8 +1,8 @@
-import { Component, Switch, Match, onMount } from "solid-js";
+import { Component, Switch, Match, onMount, createEffect, on } from "solid-js";
 
 import "./index.css";
 import { Navbar } from "./components/navbar/Navbar";
-import { Pages, currentPage, setLogged, getUser } from "./app.state";
+import { Pages, currentPage, getUser, setUser } from "./app.state";
 import { Home } from "./views/home/Home";
 import { Authentication } from "./views/authentification/Authentication";
 import { AuthenticationService } from "./services/authentication.service";
@@ -10,14 +10,22 @@ import { User } from "./model/User";
 import { NotificationsService } from "./nofication/Notification";
 
 import "./app.utils";
-import { retrieveLocal } from "./app.utils";
+import { retrieveLocal, saveInLocal } from "./app.utils";
 
 const App: Component = () => {
   retrieveLocal();
   onMount(async () => {
-    const response = await AuthenticationService.token(getUser() as User);
-    if (!!response) return setLogged(true);
+    const response = await AuthenticationService.token();
+    console.log("response: " + response);
+
+    if (!response) return setUser();
   });
+
+  createEffect(
+    on(getUser, () => {
+      if (getUser()) saveInLocal("user", getUser());
+    })
+  );
 
   return (
     <div class="app">

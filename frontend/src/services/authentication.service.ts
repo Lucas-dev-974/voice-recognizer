@@ -1,12 +1,9 @@
 import { User } from "../model/User";
-import {
-  UserLoginForm,
-  UserRegisterForm,
-} from "../views/authentification/auth.utils";
+import { UserLoginForm, UserRegisterForm } from "../utils/auth.utils";
 import { BaseService } from "./base.service";
 
 export class AuthenticationService {
-  static async token(token: Pick<User, "token">) {
+  static async token() {
     return await BaseService.get("/authentification/token");
   }
 

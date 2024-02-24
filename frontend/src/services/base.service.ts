@@ -1,5 +1,6 @@
 import { getUser } from "../app.state";
 import { addError } from "../app.utils";
+import { userLoginForm } from "../utils/auth.utils";
 
 enum HTTPMethod {
   GET = "GET",
@@ -32,6 +33,10 @@ export class BaseService {
       const response = await fetch(this.host + url, {
         method: method,
         ...body,
+        headers: {
+          ...this.getAuthorizationHeader(getUser()?.token),
+          // ...this.getContentTypeHeader(data),
+        },
       });
 
       const json = await response.json();

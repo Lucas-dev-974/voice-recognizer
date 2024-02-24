@@ -1,6 +1,6 @@
 import { Setter, createSignal, onMount } from "solid-js";
 import { LabeledTextInput } from "../../../components/labeled/TextInput";
-import { AuthUtils } from "../auth.utils";
+import { AuthUtils } from "../../../utils/auth.utils";
 
 export function Register() {
   return (

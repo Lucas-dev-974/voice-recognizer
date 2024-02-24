@@ -3,7 +3,7 @@ import "./authentication.css";
 import { DefaultButton } from "../../components/button/Button";
 import { Login } from "./auth-form/Login";
 import { Register } from "./auth-form/Register";
-import { AuthUtils } from "./auth.utils";
+import { AuthUtils } from "../../utils/auth.utils";
 
 const [onAuth, setOnAuth] = createSignal<"login" | "register">("login");
 

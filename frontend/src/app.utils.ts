@@ -27,7 +27,7 @@ export function getFromLocal(key: string) {
 
 export function retrieveLocal() {
   const user = getFromLocal("user");
-  if (user) setUser(JSON.parse(user));
+  if (user) setUser(user != "undefined" ? JSON.parse(user) : undefined);
 
   const page = getFromLocal("page");
   if (page) setCurrentPage(JSON.parse(page));
