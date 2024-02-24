@@ -41,6 +41,9 @@ def login(email, password, response):
     return {**getUser(user), "token": token}
 
 
-@hug.get("/token")
-def tokenTest():
-    return False
+@hug.get("/token", requires=authenticate)
+def tokenTest(request, response, user: hug.directives.user):
+    if "error" in user:
+        response.status = HTTP_401
+        return user
+    return True

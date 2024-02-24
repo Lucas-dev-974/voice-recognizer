@@ -54,6 +54,9 @@ def getUserStaticPath(user):
 
 @hug.post("/", requires=authenticate)
 def importFile(body, response, user: hug.directives.user):
+    if "error" in user:
+        return user
+
     save_path = getUserStaticPath(user)
     if not save_uploaded_file(body, save_path):
         response.status = HTTP_400

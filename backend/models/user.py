@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Sequence
+from sqlalchemy import Column, Integer, String, Sequence, Boolean
 from config.connexion import Base
 
 
@@ -9,6 +9,7 @@ class User(Base):
     last_name = Column(String(50))
     email = Column(String(50), unique=True)
     password = Column(String(500))
+    recognizable_voice = Column(Boolean)
 
 
 def getUser(user: User):
@@ -17,4 +18,5 @@ def getUser(user: User):
         "name": user.name,
         "email": user.email,
         "lastName": user.last_name,
+        "recognizableVoice": user.recognizable_voice,
     }

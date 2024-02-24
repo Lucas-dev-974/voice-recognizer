@@ -5,12 +5,15 @@ import os
 SECRET_KEY = "{}".format(os.environ.get("SECRET_KEY"))
 
 
-# Fonction pour créer un token JWT avec des informations utilisateur
+# TODO
+def isPublicPath(path):
+    return False
+
+
 def create_jwt(user_data):
     return jwt.encode(user_data, SECRET_KEY, algorithm="HS256")
 
 
-# Fonction pour vérifier un token JWT
 def verify_jwt(token):
     _, token = token.split(" ")
     try:
