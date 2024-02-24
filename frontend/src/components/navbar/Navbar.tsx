@@ -1,13 +1,35 @@
-import { Show } from "solid-js";
-import { Pages, logged } from "../../app.state";
+import { JSXElement, Match, Show, Switch } from "solid-js";
+import { Pages, setUser } from "../../app.state";
 import { DefaultButton } from "../button/Button";
 
 import "./navbar.css";
-import { changePage } from "../../app.utils";
+import { changePage, saveInLocal } from "../../app.utils";
+import { AuthUtils } from "../../utils/auth.utils";
+
+function LoginButton(props: { login: () => void }): JSXElement {
+  return (
+    <div class="actions">
+      <DefaultButton text="connexion" onClick={props.login} />
+    </div>
+  );
+}
+
+function LogoutButton(props: { logout: () => void }): JSXElement {
+  return (
+    <div class="actions">
+      <DefaultButton text="déconnexion" onClick={props.logout} />
+    </div>
+  );
+}
 
 export function Navbar() {
   async function login() {
     changePage(Pages.authentication);
+  }
+
+  function logout() {
+    setUser();
+    saveInLocal("user", undefined);
   }
 
   return (
@@ -15,11 +37,15 @@ export function Navbar() {
       <div class="logo" onClick={() => changePage(Pages.home)}>
         Secure Voice - SV
       </div>
-      <Show when={!logged()}>
-        <div class="actions">
-          <DefaultButton text="connexion" onClick={login} />
-        </div>
-      </Show>
+
+      <Switch>
+        <Match when={!AuthUtils.isUserLogged()}>
+          <LoginButton login={login} />
+        </Match>
+        <Match when={AuthUtils.isUserLogged()}>
+          <LogoutButton logout={logout} />
+        </Match>
+      </Switch>
     </nav>
   );
 }
