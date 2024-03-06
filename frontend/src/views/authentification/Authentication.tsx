@@ -1,6 +1,6 @@
 import { Match, Switch, createSignal } from "solid-js";
 import "./authentication.css";
-import { DefaultButton } from "../../components/button/Button";
+import { Button } from "../../components/button/Button";
 import { Login } from "./auth-form/Login";
 import { Register } from "./auth-form/Register";
 import { AuthUtils } from "../../utils/auth.utils";
@@ -30,11 +30,11 @@ export function Authentication() {
         </Switch>
 
         <div class="flex justify-end gap-2 py-3">
-          <DefaultButton
+          <Button
             text={onAuth() == "register" ? "Se connecter" : "S'enregistrer"}
             onClick={toggleAuthCard}
           />
-          <DefaultButton text="Valider" onClick={validateForm} />
+          <Button text="Valider" onClick={validateForm} />
         </div>
       </div>
     </div>
