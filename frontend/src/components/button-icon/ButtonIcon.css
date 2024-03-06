@@ -1,0 +1,3 @@
+.button-icon{
+  @apply rounded-md text-center px-5 py-1 bg-blue w-full;
+}
