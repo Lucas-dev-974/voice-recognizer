@@ -1,16 +1,27 @@
+import { Setter } from "solid-js";
+
 import "./button.css";
 
 // TODO make css for button size
 
-interface DefaultButtonProps {
+interface ButtonProps {
   text: string;
   onClick: () => void;
   size?: "sm" | "md" | "lg";
+  setRef?: Setter<HTMLButtonElement>;
+  active?: boolean;
 }
 
-export function DefaultButton(props: DefaultButtonProps) {
+export function Button(props: ButtonProps) {
   return (
-    <button class="default-button" onClick={props.onClick}>
+    <button
+      classList={{
+        active: props.active,
+      }}
+      ref={(props.setRef as Setter<HTMLButtonElement>) ?? null}
+      class="button"
+      onClick={props.onClick}
+    >
       {props.text}
     </button>
   );
