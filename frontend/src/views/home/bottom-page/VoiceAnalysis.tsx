@@ -1,21 +1,50 @@
-import { createSignal } from "solid-js";
-import { DefaultButton } from "../../../components/button/Button";
+import { Show, createSignal } from "solid-js";
+import { StartProcessToRecord } from "./StartProcessToRecord";
+import { Title } from "./Title";
+import { RecordPart } from "./RecordPart";
+
 import "./VoiceAnalysis.css";
+import { WaveSurferUtils } from "../../../utils/wavesurfer.uils";
+
+export const [startedVoiceAnalysis, setStartedVoiceAnalysis] =
+  createSignal(false);
+export const [startedRecording, setStartedRecording] = createSignal(false);
+
+const readingText: string =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
 export function VoiceAnalysis() {
-  const [startedVoiceAnalysis, setStartedVoiceAnalysis] = createSignal(false);
+  function startVoiceAnalysis() {
+    setStartedVoiceAnalysis(true);
+  }
 
-  function startVoiceAnalysis() {}
+  function startRecord() {
+    WaveSurferUtils.startRecord();
+    setStartedRecording((prev) => !prev);
+  }
+
+  function stopRecord() {
+    setStartedRecording(false);
+  }
 
   return (
     <div class="voice-analysis">
-      <p class="text-2xl text-center">
-        Débutez l'enregistrement de votre voix, pour une analyse.
-      </p>
-
-      <div class="w-1/3 mx-auto">
-        <DefaultButton onClick={startVoiceAnalysis} text="Commencer" />
-      </div>
+      <Show
+        when={startedVoiceAnalysis()}
+        fallback={
+          <StartProcessToRecord
+            startVoiceAnalysis={startVoiceAnalysis}
+            startedVoiceAnalysis={startedVoiceAnalysis()}
+          />
+        }
+      >
+        <Title title="Enregistrement pour analyse" />
+        <RecordPart
+          active={startedRecording()}
+          readingText={readingText}
+          startRecord={startRecord}
+        />
+      </Show>
     </div>
   );
 }
