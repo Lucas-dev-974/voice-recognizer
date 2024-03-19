@@ -2,8 +2,9 @@ from fastapi import APIRouter, Body, HTTPException
 
 from model.user import UserSchema, UserLoginSchema
 from middleware.auth_handler import signJWT, decodeJWT
-from middleware.auth_bearer import JWTBearer
+
 from orm.models.user import User, getUser
+
 from config.connexion import session
 from middleware.hash import verify_password, hash_password
 
@@ -22,6 +23,9 @@ def check_user(data: UserLoginSchema):
     return True
 
 
+from middleware.jwt import create_access_token
+
+
 @router.post("/register", tags=["user"])
 async def create_user(user: UserSchema = Body(...)):
     existing_user = session.query(User).filter_by(email=str(user.email).lower()).first()
@@ -37,12 +41,13 @@ async def create_user(user: UserSchema = Body(...)):
         email=str(user.email).lower(),
         password=password,
         last_name=user.last_name,
+        recognizable_voice=False,
     )
     session.add(user)
     session.commit()
 
-    token = signJWT(user.id)
-
+    # token = signJWT(user.id)
+    token = create_access_token(getUser(user))
     return {**getUser(user), "token": token}
 
 
@@ -54,10 +59,11 @@ async def user_login(user: UserLoginSchema = Body(...)):
         )
 
     user = session.query(User).filter_by(email=str(user.email).lower()).first()
-    token = signJWT(user.id)
+    # token = signJWT(user.id)
+    token = create_access_token(getUser(user))
     return {**getUser(user), "token": token}
 
 
-@router.get("/token")
-def token(token: str):
-    return decodeJWT(token)
+# @router.get("/token")
+# def token(token: str):
+#     return decodeJWT(token)

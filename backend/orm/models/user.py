@@ -2,16 +2,19 @@ from sqlalchemy import Column, Integer, String, Sequence, Boolean
 from config.connexion import Base
 from sqlalchemy.orm import relationship
 
+from orm.models.files import File
+from sqlalchemy.orm import Mapped, mapped_column
+
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
-    name = Column(String(50))
-    last_name = Column(String(50))
-    email = Column(String(50), unique=True)
-    password = Column(String(500))
-    recognizable_voice = Column(Boolean)
-    fichiers = relationship("File", back_populates="users")
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    last_name: Mapped[str]
+    email: Mapped[str]
+    password: Mapped[str]
+    recognizable_voice: Mapped[bool]
+    files: Mapped[list["File"]] = relationship()
 
 
 def getUser(user: User):
