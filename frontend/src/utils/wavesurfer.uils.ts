@@ -1,6 +1,8 @@
 import { createSignal } from "solid-js";
 import WaveSurfer from "wavesurfer.js";
 import RecordPlugin from "wavesurfer.js/dist/plugins/record";
+import { setStartedRecording } from "../views/home/bottom-page/VoiceAnalysis";
+import { AudioService } from "../services/audio.service";
 
 const [audioBlob, setAudioBlob] = createSignal<Blob>();
 
@@ -30,13 +32,19 @@ export class WaveSurferUtils {
 
   static setRecorderEvents() {
     if (!this.record) return;
-    this.record.on("record-end", (blob) => {
+
+    this.record.on("record-end", async (blob) => {
       setAudioBlob(blob);
+      console.log("okok");
+
+      await AudioService.import(blob);
+      console.log("imported");
+
       const container = document.querySelector("#recordings") as HTMLDivElement;
       const recordedUrl = URL.createObjectURL(blob);
 
       // Create wavesurfer from the recorded audio
-      const wavesurfer = WaveSurfer.create({
+      this.wavesurfer = WaveSurfer.create({
         container,
         waveColor: "rgb(200, 100, 0)",
         progressColor: "rgb(100, 50, 0)",
@@ -46,9 +54,9 @@ export class WaveSurferUtils {
       // Play button
       const button = container.appendChild(document.createElement("button"));
       button.textContent = "Play";
-      button.onclick = () => wavesurfer.playPause();
-      wavesurfer.on("pause", () => (button.textContent = "Play"));
-      wavesurfer.on("play", () => (button.textContent = "Pause"));
+      button.onclick = () => this.wavesurfer.playPause();
+      this.wavesurfer.on("pause", () => (button.textContent = "Play"));
+      this.wavesurfer.on("play", () => (button.textContent = "Pause"));
 
       // Download link
       const link = container.appendChild(document.createElement("a"));
@@ -74,6 +82,13 @@ export class WaveSurferUtils {
     this.initRecorder();
 
     this.setRecorderEvents();
+  }
+
+  static enableEndRecord() {
+    this.record.on("record-end", (blob) => {
+      setAudioBlob(blob);
+      setStartedRecording(false);
+    });
   }
 
   static async startRecord() {

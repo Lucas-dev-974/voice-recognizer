@@ -14,7 +14,7 @@ export const [userRegisterForm, setUserRegisterForm] =
     email: "",
     password: "",
     passwordConfirmation: "",
-    lastName: "",
+    last_name: "",
     name: "",
   });
 
@@ -38,7 +38,7 @@ export class AuthUtils {
     if (
       userRegisterForm()?.email &&
       userRegisterForm()?.name &&
-      userRegisterForm()?.lastName &&
+      userRegisterForm()?.last_name &&
       userRegisterForm()?.password &&
       userRegisterForm()?.passwordConfirmation
     ) {
@@ -56,6 +56,8 @@ export class AuthUtils {
       );
 
       if (!user) return;
+      console.log("okokok", user);
+
       AuthUtils.succesAuthentication(user);
     } else
       addError({ content: "Veuillez compléter le formulaire de connexion." });

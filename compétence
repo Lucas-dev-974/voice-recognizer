@@ -7,7 +7,7 @@ C14: Améliorer le modèle par rapport à l'app, premier jet sur un entrainement
 	
 - Evaluer le modèle 
 	- Metrics (loss, accuracy, confusion matrix)
-- Déterminé les point faible / diagnostique
+    - Déterminé les point faible / diagnostique
 	- Teste réel en interieur / exterieur, sans/avec bruit
 	
 - Amélioration via la data/ Solution ?

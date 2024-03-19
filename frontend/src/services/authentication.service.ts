@@ -1,10 +1,13 @@
+import { getUser } from "../app.state";
 import { User } from "../model/User";
 import { UserLoginForm, UserRegisterForm } from "../utils/auth.utils";
 import { BaseService } from "./base.service";
 
 export class AuthenticationService {
   static async token() {
-    return await BaseService.get("/authentification/token");
+    return await BaseService.get(
+      "/authentification/token?token=" + getUser()?.token
+    );
   }
 
   static async login(user: UserLoginForm) {

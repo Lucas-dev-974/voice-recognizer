@@ -35,7 +35,7 @@ export function Register() {
           id="last-name"
           label="Prénom"
           onInput={(value) =>
-            AuthUtils.updateUserRegisterForm({ lastName: value })
+            AuthUtils.updateUserRegisterForm({ last_name: value })
           }
           placeholder="Entrer votre prénom"
         />

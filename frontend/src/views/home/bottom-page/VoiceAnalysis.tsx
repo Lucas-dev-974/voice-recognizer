@@ -23,10 +23,6 @@ export function VoiceAnalysis() {
     setStartedRecording((prev) => !prev);
   }
 
-  function stopRecord() {
-    setStartedRecording(false);
-  }
-
   return (
     <div class="voice-analysis">
       <Show

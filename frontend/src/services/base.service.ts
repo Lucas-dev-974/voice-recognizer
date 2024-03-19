@@ -22,27 +22,38 @@ export class BaseService {
     const keys = Object.keys(data);
 
     keys.forEach((key) => form.append(key, data[key]));
+
+    console.log("bodyt build ok");
+
     return form;
   }
 
   static async generic(url: string, method: HTTPMethod, data?: any) {
     let body;
+    if (method != HTTPMethod.GET) body = { body: JSON.stringify(data) };
 
-    if (method != HTTPMethod.GET) body = { body: BaseService.buildForm(data) };
+    let method_ = "";
+    if (method == HTTPMethod.POST) method_ = "POST";
+    if (method == HTTPMethod.GET) method_ = "GET";
+
+    const isFormData = data instanceof FormData;
+    if (isFormData) body = { body: data };
+
     try {
       const response = await fetch(this.host + url, {
-        method: method,
+        method: method_,
         ...body,
         headers: {
+          ...(!isFormData ? { "content-type": "application/json" } : {}),
           ...this.getAuthorizationHeader(getUser()?.token),
-          // ...this.getContentTypeHeader(data),
         },
       });
 
       const json = await response.json();
 
       if (response.status != 200) {
-        addError({ content: json });
+        addError({ content: json.detail });
+        return false;
       }
 
       return await json;
@@ -75,6 +86,6 @@ export class BaseService {
   }
 
   static getAuthorizationHeader(token: string | undefined) {
-    return { Authorization: "bearer " + token };
+    return { Authorization: "Bearer " + token };
   }
 }

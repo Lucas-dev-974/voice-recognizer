@@ -1,11 +1,11 @@
-import { Show, createEffect, on, onMount } from "solid-js";
+import { Show, onMount } from "solid-js";
 import { StopRecordIcon } from "../../../icons/StopRecord";
 import { MicrophoneRecordIcon } from "./MircophoneRecord";
 import { startedRecording } from "./VoiceAnalysis";
-import { WaveSurferUtils } from "../../../utils/wavesurfer.uils";
 import { ButtonIcon } from "../../../components/button-icon/ButtonIcon";
-import { Button } from "../../../components/button/Button";
+import { WaveSurferUtils } from "../../../utils/wavesurfer.uils";
 
+import "./RecordPart.css";
 interface RecordPartProps {
   startRecord: () => void;
   active: boolean;
@@ -18,6 +18,7 @@ export function RecordPart(props: RecordPartProps) {
       document.querySelector("#progress") as HTMLDivElement
     );
     WaveSurferUtils.createWavSurfer();
+    WaveSurferUtils.enableEndRecord();
   });
 
   return (
