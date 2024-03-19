@@ -2,7 +2,7 @@ import { getUser } from "../app.state";
 import { addError } from "../app.utils";
 import { userLoginForm } from "../utils/auth.utils";
 
-enum HTTPMethod {
+export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
   PATCH = "PATCH",

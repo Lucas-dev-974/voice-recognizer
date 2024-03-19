@@ -11,13 +11,13 @@ import { NotificationsService } from "./nofication/Notification";
 
 import "./app.utils";
 import { retrieveLocal, saveInLocal } from "./app.utils";
+import { BaseService, HTTPMethod } from "./services/base.service";
 
 const App: Component = () => {
   retrieveLocal();
+
   onMount(async () => {
     const response = await AuthenticationService.token();
-    console.log("response: " + response);
-
     if (!response) return setUser();
   });
 

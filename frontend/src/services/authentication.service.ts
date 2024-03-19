@@ -5,9 +5,7 @@ import { BaseService } from "./base.service";
 
 export class AuthenticationService {
   static async token() {
-    return await BaseService.get(
-      "/authentification/token?token=" + getUser()?.token
-    );
+    return await BaseService.get("/authentification/token");
   }
 
   static async login(user: UserLoginForm) {
